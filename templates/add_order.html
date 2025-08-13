@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Order</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f9; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        form { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 350px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #007BFF; color: white; font-weight: bold; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .back-link { display: block; text-align: center; margin-top: 10px; color: #007BFF; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h2>Add New Order</h2>
+        <label>Product</label>
+        <select name="product_id" required>
+            {% for p in products %}
+                <option value="{{ p.ProductID }}">{{ p.ProductName }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" min="1" required>
+
+        <label>Buy Price (USDT)</label>
+        <input type="number" name="buy_price" step="0.01" required>
+
+        <label>Sell Price (optional)</label>
+        <input type="number" name="sell_price" step="0.01">
+
+        <label>Status</label>
+        <select name="status" required>
+            <option value="HOLD">HOLD</option>
+            <option value="SELL">SELL</option>
+        </select>
+
+        <button type="submit">Submit Order</button>
+        <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
+    </form>
+</body>
+</html>

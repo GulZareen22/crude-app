@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Order</title>
+</head>
+<body>
+    <h2>Edit Order</h2>
+    <form method="POST">
+        <label>Quantity</label>
+        <input type="number" name="quantity" value="{{ order.Quantity }}" required>
+
+        <label>Buy Price</label>
+        <input type="number" step="0.01" name="buy_price" value="{{ order.BuyPrice }}" required>
+
+        <label>Sell Price</label>
+        <input type="number" step="0.01" name="sell_price" value="{{ order.SellPrice or '' }}">
+
+        <label>Status</label>
+        <select name="status">
+            <option value="HOLD" {% if order.Status == 'HOLD' %}selected{% endif %}>HOLD</option>
+            <option value="SELL" {% if order.Status == 'SELL' %}selected{% endif %}>SELL</option>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
